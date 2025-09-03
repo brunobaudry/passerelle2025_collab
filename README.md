@@ -12,8 +12,5 @@ Bruno says hello
 Talissa says hello
 Ferhat say hello for everybody
 
-<<<<<<< HEAD
 Saadia says Hello
-=======
 Justin Tim Kurzweg greets.
->>>>>>> e3550db56f43f62e68b6a70b3e88cd20a177f209
