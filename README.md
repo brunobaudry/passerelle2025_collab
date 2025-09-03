@@ -2,7 +2,7 @@
 Bruno says hello.
 Illia says hello too to Zhyrair
 
-Zhyrair says Hello to Illa
+Zhyrair says Hello to Illia
 Viktoriia says hi
 Bruno says hello
 
