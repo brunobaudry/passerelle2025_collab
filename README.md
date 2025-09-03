@@ -1,7 +1,7 @@
 # passerelle2025_collab
 <<<<<<< HEAD
 Bruno says hello
-Illia says hello tooto Zhyrair
+Illia says hello too to Zhyrair
 
 =======
 <<<<<<< HEAD
