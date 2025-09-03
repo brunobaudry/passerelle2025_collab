@@ -1,6 +1,6 @@
 # passerelle2025_collab
 <<<<<<< HEAD
-Bruno says hello
+Bruno says hello.
 Illia says hello too to Zhyrair
 
 =======
