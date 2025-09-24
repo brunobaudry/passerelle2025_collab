@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <script src="typing_game.js"></script>
-    </head>
-    <body>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="typing_game.js"></script>
+  </head>
+  <body>
     <h1>Typing Game</h1>
-        <div class="container">
-            <div class="settings item">
-                <h2>Settings</h2>
-                <label for="nb">Number of words</label>
-                <input type="number" id="nb" width="40" max="10" min="1" value="1"/><br/>
-                <label for="len">Length of words</label>
-                <input type="number" id="len" width="40" max="10" min="2" value="2"/><br/>
-                <div id="languages">
-                    <label for="de">Deutsch</label>
-                    <input type="radio" value="de" id="de" name="lang" checked/><br/>
-                    <label for="fr">French</label>
-                    <input type="radio" value="fr" name="lang"/><br/>
+    <div class="container">
+      <div class="settings item">
+        <h2>Settings</h2>
+        <label for="nb">Number of words</label>
+        <input
+          type="number"
+          id="nb"
+          width="40"
+          max="10"
+          min="1"
+          value="1"
+        /><br />
+        <label for="len">Length of words</label>
+        <input
+          type="number"
+          id="len"
+          width="40"
+          max="10"
+          min="2"
+          value="2"
+        /><br />
+        <div id="languages">
+          <label for="de">Deutsch</label>
+          <input type="radio" value="de" id="de" name="lang" checked /><br />
+          <label for="fr">French</label>
+          <input type="radio" value="fr" name="lang" /><br />
 
-                    <label for="en">English</label>
-                    <input type="radio" value="en" name="lang"/><br/>
+          <label for="en">English</label>
+          <input type="radio" value="en" name="lang" /><br />
 
-                    <label for="zh">Chinese</label>
-                    <input type="radio" value="zh" name="lang"/><br/>
-                </div>
-
-            </div>
-            <div class="item">
-                <p id="timer">time: 0.00s</p>
-                <button id="startgame">Start</button><br/>
-                <p contenteditable="true" type="textarea" id="typedword">&nbsp;</p>
-                <p id="randomword">&nbsp;</p>
-            </div>
-            <div  class="item">&nbsp;
-                <h2>Records</h2>
-                    <ol id="allRecords"></ol>
-            
-            </div>
+          <label for="zh">Chinese</label>
+          <input type="radio" value="zh" name="lang" /><br />
         </div>
-
-
-    </body>
+      </div>
+      <div class="item">
+        <p id="timer">time: 0.00s</p>
+        <button id="startgame">Start</button><br />
+        <p contenteditable="true" type="textarea" id="typedword">&nbsp;</p>
+        <p id="randomword">&nbsp;</p>
+      </div>
+      <div class="item">
+        &nbsp;
+        <h2>Records</h2>
+        <ol id="allRecords"></ol>
+      </div>
+    </div>
+  </body>
 </html>
