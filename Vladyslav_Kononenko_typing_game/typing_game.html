@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>A Typing Game</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/typing_game.js"></script>
+    </head>
+    <body>
+    <h1>Typing Game</h1>
+        <div class="container">
+            <div class="settings item">
+                <h2>Settings</h2>
+                <label for="nb">Number of words</label>
+                <input type="number" id="nb" width="40" max="10" min="1" value="1"/><br/>
+                <label for="len">Length of words</label>
+                <input type="number" id="len" width="40" max="10" min="2" value="2"/><br/>
+                <div id="languages">
+                    <!-- setup for js stuff -->
+                </div>
+            </div>
+            
+            <div class="item">
+                <p id="timer">time: 0.00s</p>
+                <button id="startgame">Start</button><br/>
+                <p contenteditable="true" type="textarea" id="typedword" class="unclickable_input">&nbsp;</p>
+                <p id="randomword">&nbsp;</p>
+            </div>
+
+            <div class="item">&nbsp;
+                <h2>Records
+                    <ol id="allRecords">
+                        <!-- setup for js stuff -->
+                    </ol>
+                </h2>
+            </div>
+        </div>
+    </body>
+</html>
