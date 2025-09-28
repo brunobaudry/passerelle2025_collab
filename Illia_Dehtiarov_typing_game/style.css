@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    background: #2c2f3d;
+    color: #e0e0e0; 
+    font-family: 'Press Start 2P', cursive;
+    padding: 40px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #00ff00;
+    text-shadow: 2px 2px 4px #000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.item {
+    background: #1e222a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    margin: 10px;
+}
+
+button, input, select {
+    background: #333;
+    color: #e0e0e0;
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 1em;
+    width: 100%;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background: #555;
+    cursor: pointer;
+}
+
+button:active {
+    background: #777;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #00ff00;
+}
+
+#timer {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#typedword, #randomword {
+    background: #222;
+    color: #e0e0e0;
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 40px;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.correct {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.wrong {
+    background-color: #ff0000;
+    font-weight: bold;
+}
+
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ol li {
+    background: #333;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type="number"] {
+    width: 60px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+}

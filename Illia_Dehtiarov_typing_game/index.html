@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Typing Game</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="typing_game.js"></script>
+</head>
+<body>
+    <h1>Typing Game</h1>
+    <div class="container">
+        <div class="settings item">
+            <h2>Settings</h2>
+
+            <!-- Username input -->
+            <label for="username">Enter username:</label>
+            <input type="text" id="username" placeholder="Player"/><br/>
+
+            <!-- Level selector -->
+            <label for="levelSelect">Select Level:</label>
+            <select id="levelSelect">
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5">Level 5</option>
+                <option value="6">Level 6</option>
+                <option value="7">Level 7</option>
+                <option value="8">Level 8</option>
+                <option value="9">Level 9</option>
+                <option value="10">Level 10</option>
+            </select><br/>
+
+            <label for="nb">Number of words</label>
+            <input type="number" id="nb" max="10" min="1" value="1"/><br/>
+
+            <label for="len">Length of words</label>
+            <input type="number" id="len" max="10" min="2" value="2"/><br/>
+
+            <div id="languages">
+                <label for="de">Deutsch</label>
+                <input type="radio" value="de" id="de" name="lang" checked/><br/>
+
+                <label for="it">Italian</label>
+                <input type="radio" value="it" id="it" name="lang"/><br/>
+
+                <label for="en">English</label>
+                <input type="radio" value="en" id="en" name="lang"/><br/>
+                
+                <label for="es">Spanish</label>
+                <input type="radio" value="es" id="es" name="lang"/><br/>
+
+                <label for="pt-br">Portuguese (Brazil)</label>
+                <input type="radio" value="pt-br" id="pt-br" name="lang"/><br/>
+
+                <label for="fr">French</label>
+                <input type="radio" value="fr" id="fr" name="lang"/><br/>
+
+                <label for="zh">Chinese</label>
+                <input type="radio" value="zh" id="zh" name="lang"/><br/>
+            </div>
+        </div>
+
+        <div class="item">
+            <p id="timer">time: 0.00s</p>
+            <button id="startgame">Start</button>
+            <button id="stopgame">Stop</button><br/>
+            <p id="randomword">&nbsp;</p>
+            <p contenteditable="true" id="typedword">&nbsp;</p>
+
+        </div>
+
+        <div class="item">
+            <h2>Records</h2>
+            <ol id="allRecords"></ol>
+        </div>
+    </div>
+</body>
+</html>
