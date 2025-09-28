@@ -8,7 +8,6 @@ window.onload = function() {
     var lastWasDead = false;
     var penalty = 2;
 
-    var allowedLangs = ["de","it","es","pt-br","fr","zh"];
     var apiUrl = "https://random-word-api.herokuapp.com";
 
     var randomWordP = document.getElementById("randomword");
@@ -20,79 +19,101 @@ window.onload = function() {
     var lengthInput = document.getElementById("len");
     var typeWordP = document.getElementById("typedword");
 
-   
     typeWordP.setAttribute("contenteditable", "true");
 
     var level = 1;
     var username = "";
+    var isRunning = false; 
 
-  
+    // current parameters
+    var currentWordLen = 0;
+    var currentNbWords = 0;
+
+    // --- Event listeners ---
     typeWordP.addEventListener("input", onInput);
     startBtn.addEventListener("click", startGame);
     stopBtn.addEventListener("click", stopGame);
 
     document.addEventListener("keydown", function(event) {
-        var keyTyped = event.key;
-        if (keyTyped === "Dead") {
-            lastWasDead = true;
-        } else {
-            lastWasDead = false;
-            if (keyTyped === "Enter") startGame();
-            else if (timerRecorded > 0 && (event.key === "Backspace" || event.key === "Delete")) onInput(null);
-            else if (keyTyped === "Tab") { event.preventDefault(); addPenalty(); nextWord(); }
+    var keyTyped = event.key;
+    if (keyTyped === "Dead") {
+        lastWasDead = true;
+    } else {
+        lastWasDead = false;
+        if (keyTyped === "Enter") {
+            event.preventDefault();
+            var typed = typeWordP.textContent.trim();
+            if (typed === randomWords) {
+                checkWord(typed); // normal submit
+            } else {
+                addPenalty();
+                nextWord(); // skip with penalty (+2 letters)
+            }
+        } else if (timerRecorded > 0 && (event.key === "Backspace" || event.key === "Delete")) {
+            onInput(null);
         }
-    });
-var isRunning = false; 
+    }
+});
 
-function startGame() {
-    clearInterval(intervalID);
-    isRunning = true; 
-    username = document.getElementById("username").value || "Player";
-    level = parseInt(document.getElementById("levelSelect").value);
 
-    var nbWordsLevel = (parseInt(nbWordInput.value) || 5) + (level - 1);
-    var wordLenLevel = (parseInt(lengthInput.value) || 5) + Math.floor((level-1)/2);
+    // --- Game functions ---
+    function startGame() {
+        clearInterval(intervalID);
+        isRunning = true; 
+        username = document.getElementById("username").value || "Player";
+        level = parseInt(document.getElementById("levelSelect").value);
 
-    getRandomWord(wordLenLevel, nbWordsLevel).then(function(result) {
-        randomWords = result;
-        randomWordP.textContent = randomWords;
+        // base values
+        currentNbWords = (parseInt(nbWordInput.value) || 5) + (level - 1);
+        currentWordLen = (parseInt(lengthInput.value) || 5) + Math.floor((level-1)/2);
+
+        loadNewWord();
+    }
+
+    function stopGame() {
+        clearInterval(intervalID);
+        intervalID = 0;
+        isRunning = false; 
+        timerP.textContent = "time: " + timerRecorded + "s"; 
         typeWordP.innerHTML = "";
-        timerRecorded = 0;
-        startTime = 0;
-        intervalID = setInterval(updateTimer, 10);
+        randomWordP.textContent = "";
         timerP.classList.remove("blink");
         randomWordP.classList.remove("blink");
-        typeWordP.focus();
-    }).catch(function(err){
-        randomWordP.textContent = "Ошибка загрузки слов";
-        console.error(err);
-    });
-}
+    }
 
-function stopGame() {
-    clearInterval(intervalID);
-    intervalID = 0;
-    isRunning = false; 
-    timerP.textContent = "time: " + timerRecorded + "s"; 
-    typeWordP.innerHTML = "";
-    randomWordP.textContent = "";
-    timerP.classList.remove("blink");
-    randomWordP.classList.remove("blink");
-}
+    function loadNewWord() {
+        getRandomWord(currentWordLen, currentNbWords).then(function(result) {
+            randomWords = result;
+            randomWordP.textContent = randomWords;
+            typeWordP.innerHTML = "";
+            timerRecorded = 0;
+            startTime = 0;
+            intervalID = setInterval(updateTimer, 10);
+            timerP.classList.remove("blink");
+            randomWordP.classList.remove("blink");
+            typeWordP.focus();
+        }).catch(function(err){
+            randomWordP.textContent = "Error loading words";
+            console.error(err);
+        });
+    }
 
-function updateTimer() {
-    if (!isRunning) return; 
-    if (startTime === 0) startTime = Date.now();
-    timerRecorded = ((Date.now() - startTime)/1000).toFixed(2);
-    timerP.textContent = "time: " + timerRecorded + "s";
-}
+    function updateTimer() {
+        if (!isRunning) return; 
+        if (startTime === 0) startTime = Date.now();
+        timerRecorded = ((Date.now() - startTime)/1000).toFixed(2);
+        timerP.textContent = "time: " + timerRecorded + "s";
+    }
 
     function onInput() {
         var typedString = typeWordP.textContent.trim();
         var hasError = false;
 
         for (var i = 0; i < typedString.length; i++) {
-            if (typedString[i] !== randomWords[i]) { hasError = true; break; }
+            if (typedString[i] !== randomWords[i]) { 
+                hasError = true; 
+                break; 
+            }
         }
 
         checkWord(typedString);
@@ -105,7 +126,9 @@ function updateTimer() {
         for (var i = 0; i < text.length; i++) {
             var charA = text[i].replace(/ /g, '\u00A0').charCodeAt(0);
             var charB = randomWords[i].replace(/ /g, '\u00A0').charCodeAt(0);
-            displayText += (charA === charB) ? '<span class="correct">' + randomWords[i] + '</span>' : '<span class="wrong">' + randomWords[i] + '</span>';
+            displayText += (charA === charB) 
+                ? '<span class="correct">' + randomWords[i] + '</span>' 
+                : '<span class="wrong">' + randomWords[i] + '</span>';
         }
         return displayText + end;
     }
@@ -115,6 +138,7 @@ function updateTimer() {
             clearInterval(intervalID);
             intervalID = 0;
             typeWordP.blur();
+
             if (timerRecorded > 0) {
                 allRecords.push({ username, time: timerRecorded, word: typed, level });
                 allRecords.sort((a,b)=>a.time-b.time);
@@ -125,19 +149,27 @@ function updateTimer() {
                     allRecordsOL.appendChild(li);
                 });
             }
+
             timerP.classList.add("blink");
             randomWordP.classList.add("blink");
-            timerRecorded = 0;
-            startTime = 0;
+
+            // auto increase difficulty
+            currentNbWords++;
+            currentWordLen++;
+
+            setTimeout(loadNewWord, 1000); // delay before next word
         }
     }
 
-    function addPenalty() { timerRecorded = parseFloat(timerRecorded) + penalty; }
-    function nextWord() { clearInterval(intervalID); startGame(); }
-    function updateTimer() {
-        if (startTime === 0) startTime = Date.now();
-        timerRecorded = ((Date.now() - startTime)/1000).toFixed(2);
-        timerP.textContent = "time: " + timerRecorded + "s";
+    function addPenalty() { 
+        timerRecorded = parseFloat(timerRecorded) + penalty; 
+    }
+
+    function nextWord() { 
+        clearInterval(intervalID); 
+        // penalty: +2 letters
+        currentWordLen += 2;
+        loadNewWord(); 
     }
 
     function getRandomWord(length, number) {
@@ -145,3 +177,4 @@ function updateTimer() {
         return fetch(url).then(res=>res.json()).then(data=>data.join(" "));
     }
 };
+
