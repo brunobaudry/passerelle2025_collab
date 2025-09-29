@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: "Press Start 2P", cursive;
+  padding: 50px;
+}
+
+h1 {
+  font-size: 2em;
+  color: #00ff00;
+  text-shadow: 2px 2px 4px #000;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#timer {
+  font-size: 1.5em;
+  color: #ff0000;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.correct {
+  color: #00ff00;
+  font-weight: bold;
+  animation: correctAnim 0.5s ease-in-out;
+}
+.wrong {
+  background-color: #ff0000;
+  font-weight: bold;
+  animation: wrongAnim 0.5s ease-in-out;
+}
+
+@keyframes correctAnim {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wrongAnim {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+input,
+button {
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "Press Start 2P", cursive;
+  background-color: #333;
+  color: #fff;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+  transform: scale(1.05);
+}
+button {
+  background-color: #00ff00;
+  color: #000;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #00cc00;
+  transform: scale(1.1);
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
+ol li {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+ol li:hover {
+  transform: scale(1.05);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.item {
+  flex-grow: 4;
+}
+.item p {
+  padding: 6px;
+}
+
+[contenteditable="true"]:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
